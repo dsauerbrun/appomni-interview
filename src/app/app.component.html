@@ -1,1 +1,24 @@
-<h1>hello</h1>
+<h1 [hidden]="selectedContact">Contacts</h1>
+<h1 *ngIf="selectedContact"><a>Contacts</a> - {{selectedContact.name}}</h1>
+<div class="container" [hidden]="selectedContact">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<th>Name</th>
+					<th>Company</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let contact of contacts">
+						<td><a (click)="selectContact(contact)">{{contact.name}}</a></td>
+						<td>{{contact.company}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="container" *ngIf="selectedContact">
+	<contact-edit></contact-edit>
+</div>
+
