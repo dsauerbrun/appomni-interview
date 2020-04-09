@@ -112,10 +112,7 @@ export class ContactEditComponent {
   		// only autofill address for new contacts and for when address hasn't been filled out
   		let exampleAddress = this.allContacts.find(x => x.company === this.editContact.company);
   		if (exampleAddress) {
-  			this.editContact.address = exampleAddress.address;
-	  		this.editContact.city = exampleAddress.city;
-	  		this.editContact.state = exampleAddress.state;
-	  		this.editContact.zip = exampleAddress.zip;
+  			this.editContact.copyAddress(exampleAddress);
   		}
   	}
   }

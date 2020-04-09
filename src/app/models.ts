@@ -64,4 +64,12 @@ export class Contact {
 		this.state = editedContact.state;
 		this.zip = editedContact.zip;
 	}
+
+	copyAddress(exampleAddress: Contact) {
+		this.address = exampleAddress.address;
+		this.city = exampleAddress.city;
+		this.state = exampleAddress.state;
+		this.zip = exampleAddress.zip;
+	}
+	
 }
