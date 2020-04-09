@@ -29,12 +29,9 @@ export class Contact {
 	state: string;
 	zip: string;
 
+
 	constructor(name: string, email: string = null, company: string = null, phone: string = null, address: string = null, city: string = null, state: string = null, zip: string = null) {
-		if (!name || name == '') {
-			throw 'Your contact must have a name';
-		}
 		this.name = name;
-		this.slug = string_to_slug(name);
 		email && (this.email = email);
 		company && (this.company = company);
 		phone && (this.phone = phone);
@@ -42,5 +39,24 @@ export class Contact {
 		city && (this.city = city);
 		state && (this.state = state);
 		zip && (this.zip = zip);
+	}
+
+	constructor() {
+		// empty constructor for new contacts
+	}
+
+	generateSlug() {
+		this.slug = string_to_slug(this.name);
+	}
+
+	changeContact(editedContact: Contact) {
+		this.name = editedContact.name;
+		this.email = editedContact.email;
+		this.company = editedContact.company;
+		this.phone = editedContact.phone;
+		this.address = editedContact.address;
+		this.city = editedContact.city;
+		this.state = editedContact.state;
+		this.zip = editedContact.zip;
 	}
 }

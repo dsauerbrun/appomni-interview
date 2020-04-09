@@ -1,0 +1,67 @@
+<div class="alert alert-danger alert-dismissible show" role="alert" *ngIf="validationError">
+  {{validationError}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="validationError = null">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="form-group row">
+  <label for="name" class="col-sm-2 col-form-label">Name <span class="required-symbol">*</span></label>
+  <div class="col-sm-10">
+    <input [(ngModel)]="editContact.name" id="name" type="text" class="form-control" >
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="email" class="col-sm-2 col-form-label">Email</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="email" [(ngModel)]="editContact.email">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="phone" [(ngModel)]="editContact.phone">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="company" class="col-sm-2 col-form-label">Company</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="company" [(ngModel)]="editContact.company">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="address" class="col-sm-2 col-form-label">Address</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="address" [(ngModel)]="editContact.address">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="city" class="col-sm-2 col-form-label">City</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="city" [(ngModel)]="editContact.city">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="state" class="col-sm-2 col-form-label">State</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="state" [(ngModel)]="editContact.state">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="zip" class="col-sm-2 col-form-label">Zip</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="zip" [(ngModel)]="editContact.zip">
+  </div>
+</div>
+
+<div class="button-row row">
+	<div class="col-md-12">
+		<div class="btn btn-default" (click)="cancel()">Cancel</div>
+		<div class="btn btn-primary" (click)="saveContact()">Save</div>
+	</div>
+</div>

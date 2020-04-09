@@ -1,3 +1,15 @@
 a {
 	cursor: pointer
 }
+
+.button-row {
+	text-align: right;
+	.btn {
+		margin-left: 5px;
+	}
+}
+
+.required-symbol {
+	font-size: 18px;
+	color: red;
+}
