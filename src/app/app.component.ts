@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Contact, sortingLogic } from './models';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
 	public boundCancelCallback: Function;
 
 
-	constructor(private activatedRoute: ActivatedRoute) {
+	constructor(private activatedRoute: ActivatedRoute, private location: Location) {
 	}
 
 	ngOnInit() {
@@ -25,10 +26,12 @@ export class AppComponent {
 		// seeding data
 		this.contacts.push(new Contact('Daniel', 'dsauerbrun@gmail.com', 'Freelance', '818-254-8697', '123 Fake Street', 'Springfield', '??', '81657'));
 		this.contacts[0].id = 1;
+		this.contacts[0].generateSlug();
   }
 
   selectContact(contact: Contact) {
   	this.selectedContact = contact;
+  	this.location.replaceState(`/contacts/${contact.slug}`);
   }
 
   updateSorting(prop: string) {
@@ -67,17 +70,20 @@ export class AppComponent {
 
   newContact() {
   	this.selectedContact = new Contact();
+  	this.location.replaceState(`/contacts/new`);
   }
 
   public save(contact: Contact = null) {
   	if (contact) {
   		this.contacts.push(contact);
+  		contact.generateSlug();
   	}
   	this.selectedContact = null;
   }
 
   public cancel() {
   	this.selectedContact = null;
+  	this.location.replaceState(`/contacts`);
   }
 
 }

@@ -14,6 +14,10 @@ const routes: Routes = [
       path: 'contacts',
       component: AppComponent
   },
+  {
+      path: 'contacts/:slug',
+      component: AppComponent
+  },
 	
 ];
 
