@@ -79,6 +79,7 @@ export class AppComponent {
   		contact.generateSlug();
   	}
   	this.selectedContact = null;
+  	this.location.replaceState(`/contacts`);
   }
 
   public cancel() {
