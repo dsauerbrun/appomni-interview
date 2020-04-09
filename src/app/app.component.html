@@ -1,5 +1,5 @@
 <h1 [hidden]="selectedContact">Contacts</h1>
-<h1 *ngIf="selectedContact"><a (click)="selectedContact = null">Contacts</a> - {{selectedContact.id ? selectedContact.name : 'New Contact'}}</h1>
+<h1 *ngIf="selectedContact"><a (click)="cancel()">Contacts</a> - {{selectedContact.id ? selectedContact.name : 'New Contact'}}</h1>
 <div class="container" [hidden]="selectedContact">
 	<div class="row">
 		<div class="col-md-12">
@@ -24,6 +24,6 @@
 	</div>
 </div>
 <div class="container" *ngIf="selectedContact">
-	<contact-edit [originalContact]="selectedContact" [saveCallback]="boundSaveCallback" [cancelCallback]="boundCancelCallback"></contact-edit>
+	<contact-edit [allContacts]="contacts" [originalContact]="selectedContact" [saveCallback]="boundSaveCallback" [cancelCallback]="boundCancelCallback"></contact-edit>
 </div>
 

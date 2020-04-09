@@ -21,11 +21,13 @@ export class AppComponent {
 	ngOnInit() {
 		this.boundSaveCallback = this.save.bind(this);
 		this.boundCancelCallback = this.cancel.bind(this);
+
+		// seeding data
 		this.contacts.push(new Contact('Daniel', 'dsauerbrun@gmail.com', 'Freelance', '818-254-8697', '123 Fake Street', 'Springfield', '??', '81657'));
+		this.contacts[0].id = 1;
   }
 
   selectContact(contact: Contact) {
-  	console.log('selecting')
   	this.selectedContact = contact;
   }
 
@@ -87,6 +89,7 @@ export class AppComponent {
   styleUrls: ['app.component.scss']
 })
 export class ContactEditComponent {
+	@Input() allContacts: Contact[];
 	@Input() originalContact: Contact;
 	@Input() public saveCallback: Function;
 	@Input() public cancelCallback: Function;
@@ -97,13 +100,26 @@ export class ContactEditComponent {
 		this.editContact = new Contact(this.originalContact.name, this.originalContact.email, this.originalContact.company, this.originalContact.phone, this.originalContact.address, this.originalContact.city, this.originalContact.state, this.originalContact.zip);
   }
 
+  companyUpdated() {
+  	if (!this.originalContact.id && !this.editContact.address && !this.editContact.city && !this.editContact.state && !this.editContact.zip) {
+  		// only autofill address for new contacts and for when address hasn't been filled out
+  		let exampleAddress = this.allContacts.find(x => x.company === this.editContact.company);
+  		if (exampleAddress) {
+  			this.editContact.address = exampleAddress.address;
+	  		this.editContact.city = exampleAddress.city;
+	  		this.editContact.state = exampleAddress.state;
+	  		this.editContact.zip = exampleAddress.zip;
+  		}
+  	}
+  }
+
   validateContact() {
   	let validationError: string = '';
-  	if (!this.editContact.name || this.editContact.name == '') {
+  	if (!this.editContact.name || this.editContact.name === '') {
   		validationError = 'Name is a required field.';
   	}
 
-  	if (this.validationError == '') {
+  	if (this.validationError === '') {
   		this.validationError = null;
   	} else {
   		this.validationError = validationError;
