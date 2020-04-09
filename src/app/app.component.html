@@ -10,11 +10,11 @@
 		<div class="col-md-12">
 			<table class="table table-striped">
 				<thead>
-					<th>Name</th>
-					<th>Company</th>
+					<th><a (click)="updateSorting('name')">Name</a> <i *ngIf="sortingLogic && sortingLogic.prop === 'name'" class="glyphicon" [class.glyphicon-sort-by-attributes]="sortingLogic && !sortingLogic.reverse" [class.glyphicon-sort-by-attributes-alt]="sortingLogic && sortingLogic.reverse"></i></th>
+					<th><a (click)="updateSorting('company')">Company</a> <i *ngIf="sortingLogic && sortingLogic.prop === 'company'" class="glyphicon" [class.glyphicon-sort-by-attributes]="sortingLogic && !sortingLogic.reverse" [class.glyphicon-sort-by-attributes-alt]="sortingLogic && sortingLogic.reverse"></i></th>
 				</thead>
 				<tbody>
-					<tr *ngFor="let contact of contacts">
+					<tr *ngFor="let contact of sortBy()">
 						<td><a (click)="selectContact(contact)">{{contact.name}}</a></td>
 						<td>{{contact.company}}</td>
 					</tr>

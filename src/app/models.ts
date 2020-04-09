@@ -17,6 +17,11 @@ function string_to_slug (str) {
     return str;
 }
 
+export interface sortingLogic {
+	property: string;
+	reverse: boolean;
+}
+
 export class Contact {
 	id: number;
 	name: string;

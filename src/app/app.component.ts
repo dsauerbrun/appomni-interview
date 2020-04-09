@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Contact } from './models';
+import { Contact, sortingLogic } from './models';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,8 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent {
 	contacts: Contact[] = [];
 	selectedContact: Contact = null;
+	sortingLogic: sortingLogic = null;
 	public boundSaveCallback: Function;
 	public boundCancelCallback: Function;
+
 
 	constructor(private activatedRoute: ActivatedRoute) {
 	}
@@ -26,6 +28,40 @@ export class AppComponent {
   	console.log('selecting')
   	this.selectedContact = contact;
   }
+
+  updateSorting(prop: string) {
+  	if (this.sortingLogic && this.sortingLogic.prop === prop) {
+  		this.sortingLogic.reverse = !this.sortingLogic.reverse;
+  	} else {
+  		this.sortingLogic = {
+  			prop: prop,
+  			reverse: false
+  		};
+  	}
+  }
+
+  sortBy() {
+  	if (!this.sortingLogic) {
+  		return this.contacts;
+  	}
+
+  	let prop = this.sortingLogic.prop;
+  	let reverse = this.sortingLogic.reverse;
+
+	  let sortedContacts = this.contacts.sort((a, b) => {
+	  	let aProp = a[prop] && a[prop].toLowerCase();
+	  	let bProp = b[prop] && b[prop].toLowerCase();
+	  	return aProp > bProp ? 1 : aProp === bProp ? 0 : -1
+	  });
+
+	  if (reverse) {
+	  	sortedContacts = sortedContacts.reverse();
+	  }
+
+	  return sortedContacts;
+	}
+
+  /////////////////////// CRUD utilities
 
   newContact() {
   	this.selectedContact = new Contact();
